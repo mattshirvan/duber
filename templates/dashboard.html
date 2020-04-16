@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Duber: Welcome!</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-text">
+                Duber
+            </span>
+            <span class="navbar-text">
+                Welcome, {{session['name']}}
+            </span>
+            <form action="/logout" method="POST">
+                <input type="submit" value="logout">
+            </form>
+        </nav>
+        <h1>Need a Ride?</h1>
+        {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <h3>{{message}}</h3>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        <form action="/ride" method="POST">
+            <div class="form-group">
+              <label for="formGroupExampleInput">Start:</label>
+              <input type="text" name="start" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Destination:</label>
+              <input type="text" name="end" class="form-control">
+            </div>        
+            <button type="submit" class="btn btn-primary">Request a Ride</button>
+        </form>
+        <hr>
+        <h1>Ride Request</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requests %} 
+                  <tr>
+                    <th scope="row">{{request.start}}</th>
+                    <td>{{request.end}}</td>
+                    <td>{{request.user.name()}}</td>
+                    <td></td>
+                  </tr>                  
+                {% endfor %}
+                </tbody>
+              </table>
+        <div>
+        </div>
+    </div>
+</body>
+</html>

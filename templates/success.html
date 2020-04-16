@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1{
+            display: inline-block;
+        }
+    </style>
+    <title>Success</title>
+</head>
+<body>
+    <div>
+        <h1>Welcome, {{session['name']}}</h1>
+        <form action="/logout" method="POST">
+            <input type="submit" value="logout">
+        </form>
+    </div>
+</body>
+</html>
